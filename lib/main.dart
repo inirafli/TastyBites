@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tasty_bites/styles/styles.dart';
+import 'package:flutter/services.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,9 +12,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+
+    return MaterialApp(
       title: 'Tasty Bites',
-      initialRoute: null,
+      theme: ThemeData(
+        colorScheme: Theme.of(context).colorScheme.copyWith(
+              primary: primaryColor,
+              onPrimary: onPrimaryColor,
+              secondary: secondaryColor,
+              onSecondary: onSecondaryColor,
+            ),
+        textTheme: appTextTheme,
+      ),
+      initialRoute: HomePage.routeName,
+      routes: {
+        HomePage.routeName: (context) => const HomePage(),
+      },
     );
   }
 }

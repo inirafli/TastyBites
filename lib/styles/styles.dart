@@ -8,13 +8,13 @@ const onSecondaryColor = Colors.white;
 
 final TextTheme appTextTheme = TextTheme(
   displayLarge: GoogleFonts.rubik(
-      fontSize: 96, fontWeight: FontWeight.bold, letterSpacing: -1.5),
+      fontSize: 96, fontWeight: FontWeight.w700, letterSpacing: -1.5),
   displayMedium: GoogleFonts.rubik(
-      fontSize: 60, fontWeight: FontWeight.bold, letterSpacing: -0.5),
-  displaySmall: GoogleFonts.rubik(fontSize: 48, fontWeight: FontWeight.bold),
+      fontSize: 60, fontWeight: FontWeight.w700, letterSpacing: -0.5),
+  displaySmall: GoogleFonts.rubik(fontSize: 48, fontWeight: FontWeight.w700),
   headlineMedium: GoogleFonts.rubik(
-      fontSize: 34, fontWeight: FontWeight.bold, letterSpacing: 0.25),
-  headlineSmall: GoogleFonts.rubik(fontSize: 24, fontWeight: FontWeight.bold),
+      fontSize: 34, fontWeight: FontWeight.w700, letterSpacing: 0.25),
+  headlineSmall: GoogleFonts.rubik(fontSize: 24, fontWeight: FontWeight.w700),
   titleLarge: GoogleFonts.rubik(
       fontSize: 20, fontWeight: FontWeight.w500, letterSpacing: 0.15),
   titleMedium: GoogleFonts.rubik(
