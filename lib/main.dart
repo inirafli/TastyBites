@@ -5,17 +5,13 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Tasty Bites',
-      theme: ThemeData(
-          // TODO
-          ),
       initialRoute: null,
-      routes: null,
     );
   }
 }
