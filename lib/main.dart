@@ -14,9 +14,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.black));
-
     return MaterialApp(
       title: 'Tasty Bites',
       theme: ThemeData(
@@ -27,6 +24,12 @@ class MyApp extends StatelessWidget {
               onSecondary: onSecondaryColor,
             ),
         textTheme: appTextTheme,
+        appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.dark
+          ),
+        ),
       ),
       initialRoute: HomePage.routeName,
       routes: {
