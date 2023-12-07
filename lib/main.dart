@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tasty_bites/model/restaurant_model.dart';
+import 'package:tasty_bites/screens/detail_screen.dart';
 import 'package:tasty_bites/styles/styles.dart';
 import 'package:flutter/services.dart';
 import 'screens/home_screen.dart';
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+        const SystemUiOverlayStyle(statusBarColor: Colors.black));
 
     return MaterialApp(
       title: 'Tasty Bites',
@@ -29,6 +31,9 @@ class MyApp extends StatelessWidget {
       initialRoute: HomePage.routeName,
       routes: {
         HomePage.routeName: (context) => const HomePage(),
+        RestaurantDetailPage.routeName: (context) => RestaurantDetailPage(
+            restaurant: ModalRoute.of(context)?.settings.arguments as Restaurant
+        ),
       },
     );
   }
