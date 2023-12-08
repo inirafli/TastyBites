@@ -8,7 +8,6 @@ class RestaurantService {
       List<Restaurant> restaurants = parseRestaurants(data);
       return restaurants;
     } catch (e) {
-      print('Error loading restaurants: $e');
       return [];
     }
   }

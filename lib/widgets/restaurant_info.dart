@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tasty_bites/model/restaurant_model.dart';
 
+import 'menu_section.dart';
+
 class RestaurantInfo extends StatelessWidget {
   final Restaurant restaurant;
 
@@ -13,16 +15,19 @@ class RestaurantInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Image
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(16.0),
-              bottomRight: Radius.circular(16.0),
-            ),
-            child: Image.network(
-              restaurant.pictureId,
-              width: double.infinity,
-              height: 240.0,
-              fit: BoxFit.cover,
+          Hero(
+            tag: restaurant.name,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(16.0),
+                bottomRight: Radius.circular(16.0),
+              ),
+              child: Image.network(
+                restaurant.pictureId,
+                width: double.infinity,
+                height: 240.0,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Padding(
@@ -87,81 +92,20 @@ class RestaurantInfo extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 24.0),
-                Text(
-                  'Foods',
-                  style: Theme.of(context).textTheme.titleMedium,
+                MenusSection(
+                  items: restaurant.menus.foods,
+                  icon: Icons.restaurant,
+                  title: 'Foods',
                 ),
-                const SizedBox(height: 6.0),
-                SizedBox(
-                  height: 118.0,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: restaurant.menus.foods.length,
-                    itemBuilder: (context, index) {
-                      final food = restaurant.menus.foods[index];
-                      return _buildMenuCard(
-                          context, food.name, Icons.restaurant, 'Rp. 15,000');
-                    },
-                  ),
-                ),
-                const SizedBox(height: 24.0),
-                Text(
-                  'Drinks',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const SizedBox(height: 6.0),
-                SizedBox(
-                  height: 118.0,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: restaurant.menus.drinks.length,
-                    itemBuilder: (context, index) {
-                      final drink = restaurant.menus.drinks[index];
-                      return _buildMenuCard(
-                          context, drink.name, Icons.local_drink_rounded, 'Rp. 15,000');
-                    },
-                  ),
+                MenusSection(
+                  items: restaurant.menus.drinks,
+                  icon: Icons.local_drink_rounded,
+                  title: 'Drinks',
                 ),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildMenuCard(
-      BuildContext context, String name, IconData icon, String price) {
-    return SizedBox(
-      width: 180.0,
-      child: Card(
-        color: Theme.of(context).colorScheme.primary,
-        elevation: 0,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-        ),
-        margin: const EdgeInsets.only(right: 12.0),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                size: 32.0,
-              ),
-              const SizedBox(height: 12.0),
-              Text(
-                name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              const SizedBox(height: 2.0),
-              Text(price, style: Theme.of(context).textTheme.bodySmall),
-            ],
-          ),
-        ),
       ),
     );
   }

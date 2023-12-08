@@ -31,15 +31,18 @@ class RestaurantCard extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(16.0),
-          ),
-          child: Image.network(
-            restaurant.pictureId,
-            width: 120.0,
-            height: 90.0,
-            fit: BoxFit.cover,
+        Hero(
+          tag: restaurant.name,
+          child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(16.0),
+            ),
+            child: Image.network(
+              restaurant.pictureId,
+              width: 120.0,
+              height: 90.0,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         Expanded(
