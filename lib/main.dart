@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasty_bites/model/restaurant_model.dart';
 import 'package:tasty_bites/screens/detail_screen.dart';
-import 'package:tasty_bites/styles/styles.dart';
+import 'package:tasty_bites/common/styles.dart';
 import 'package:flutter/services.dart';
 import 'screens/home_screen.dart';
 
