@@ -25,7 +25,7 @@ class MenusSection extends StatelessWidget {
         ),
         const SizedBox(height: 6.0),
         SizedBox(
-          height: 116.0,
+          height: 120.0,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: items.length,

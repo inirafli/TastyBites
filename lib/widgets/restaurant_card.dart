@@ -40,7 +40,7 @@ class RestaurantCard extends StatelessWidget {
             child: Image.network(
               restaurant.pictureId,
               width: 120.0,
-              height: 90.0,
+              height: 94.0,
               fit: BoxFit.cover,
             ),
           ),
