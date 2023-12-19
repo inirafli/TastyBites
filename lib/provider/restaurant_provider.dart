@@ -33,5 +33,51 @@ class RestaurantProvider extends ChangeNotifier {
     }
   }
 
-// TODO: More Methods!
+  Future<void> fetchRestaurantDetail(String id) async {
+    try {
+      _state = ResultState.loading;
+      notifyListeners();
+
+      await _apiServices.getRestaurantDetail(id);
+
+      _state = ResultState.done;
+      notifyListeners();
+    } catch (e) {
+      _state = ResultState.error;
+      _message = 'Error: $e';
+      notifyListeners();
+    }
+  }
+
+  Future<void> searchRestaurants(String query) async {
+    try {
+      _state = ResultState.loading;
+      notifyListeners();
+
+      _restaurants = await _apiServices.searchRestaurants(query);
+
+      _state = ResultState.done;
+      notifyListeners();
+    } catch (e) {
+      _state = ResultState.error;
+      _message = 'Error: $e';
+      notifyListeners();
+    }
+  }
+
+  Future<void> addReview(String id, String name, String review) async {
+    try {
+      _state = ResultState.loading;
+      notifyListeners();
+
+      await _apiServices.addReview(id, name, review);
+
+      _state = ResultState.done;
+      notifyListeners();
+    } catch (e) {
+      _state = ResultState.error;
+      _message = 'Error: $e';
+      notifyListeners();
+    }
+  }
 }

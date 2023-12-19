@@ -1,10 +1,6 @@
-import 'dart:convert';
-
 class Restaurant {
   final String id, name, description, pictureId, city;
   final double rating;
-  final Menus menus;
-  final List<CustomerReview> customerReviews;
 
   Restaurant({
     required this.id,
@@ -13,8 +9,6 @@ class Restaurant {
     required this.pictureId,
     required this.city,
     required this.rating,
-    required this.menus,
-    required this.customerReviews,
   });
 
   factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(
@@ -24,10 +18,57 @@ class Restaurant {
         pictureId: json['pictureId'],
         city: json['city'],
         rating: json['rating']?.toDouble() ?? 0.0,
+      );
+}
+
+class RestaurantDetail {
+  final String id, name, description, city, address, pictureId;
+  final List<Category> categories;
+  final Menus menus;
+  final double rating;
+  final List<CustomerReview> customerReviews;
+
+  RestaurantDetail({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.city,
+    required this.address,
+    required this.pictureId,
+    required this.categories,
+    required this.menus,
+    required this.rating,
+    required this.customerReviews,
+  });
+
+  factory RestaurantDetail.fromJson(Map<String, dynamic> json) =>
+      RestaurantDetail(
+        id: json['id'],
+        name: json['name'],
+        description: json['description'],
+        city: json['city'],
+        address: json['address'],
+        pictureId: json['pictureId'],
+        categories: (json['categories'] as List)
+            .map((item) => Category.fromJson(item))
+            .toList(),
         menus: Menus.fromJson(json['menus']),
+        rating: json['rating']?.toDouble() ?? 0.0,
         customerReviews: (json['customerReviews'] as List)
             .map((item) => CustomerReview.fromJson(item))
             .toList(),
+      );
+}
+
+class Category {
+  final String name;
+
+  Category({
+    required this.name,
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+        name: json['name'],
       );
 }
 
@@ -75,13 +116,4 @@ class CustomerReview {
         review: json['review'],
         date: json['date'],
       );
-}
-
-List<Restaurant> parseRestaurants(String? json) {
-  if (json == null) {
-    return [];
-  }
-
-  final List parsed = jsonDecode(json)['restaurants'];
-  return parsed.map((json) => Restaurant.fromJson(json)).toList();
 }

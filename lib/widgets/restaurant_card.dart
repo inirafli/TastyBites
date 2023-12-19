@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasty_bites/common/config.dart';
 import 'package:tasty_bites/model/restaurant_model.dart';
 import 'package:tasty_bites/screens/detail_screen.dart';
 
@@ -38,7 +39,7 @@ class RestaurantCard extends StatelessWidget {
               topLeft: Radius.circular(16.0),
             ),
             child: Image.network(
-              restaurant.pictureId,
+              '${Config.mediumImageUrl}${restaurant.pictureId}',
               width: 120.0,
               height: 94.0,
               fit: BoxFit.cover,

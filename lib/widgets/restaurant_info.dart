@@ -92,16 +92,16 @@ class RestaurantInfo extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 24.0),
-                MenusSection(
-                  items: restaurant.menus.foods,
-                  icon: Icons.restaurant,
-                  title: 'Foods',
-                ),
-                MenusSection(
-                  items: restaurant.menus.drinks,
-                  icon: Icons.local_drink_rounded,
-                  title: 'Drinks',
-                ),
+                // MenusSection(
+                //   items: restaurant.menus.foods,
+                //   icon: Icons.restaurant,
+                //   title: 'Foods',
+                // ),
+                // MenusSection(
+                //   items: restaurant.menus.drinks,
+                //   icon: Icons.local_drink_rounded,
+                //   title: 'Drinks',
+                // ),
               ],
             ),
           ),

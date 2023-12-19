@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tasty_bites/widgets/restaurant_list.dart';
 import 'package:tasty_bites/widgets/search_bar.dart';
 
-import '../model/restaurant_model.dart';
-import '../model/restaurant_service.dart';
+import '../provider/restaurant_provider.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
@@ -11,46 +11,23 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  late List<Restaurant> _allRestaurants;
-  late List<Restaurant> _filteredRestaurants;
-  late bool _hasError;
   final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _allRestaurants = [];
-    _filteredRestaurants = [];
-    _loadRestaurants();
-    _hasError = false;
-  }
-
-  Future<void> _loadRestaurants() async {
-    try {
-      final restaurants = await RestaurantService().getRestaurants();
-      setState(() {
-        _allRestaurants = restaurants;
-        _filteredRestaurants = _allRestaurants;
-        _hasError = false;
-      });
-    } catch (e) {
-      setState(() {
-        _hasError = true;
-      });
-    }
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      Provider.of<RestaurantProvider>(context, listen: false).fetchRestaurants();
+    });
   }
 
   void _filterRestaurants(String query) {
-    setState(() {
-      _filteredRestaurants = _allRestaurants
-          .where((restaurant) =>
-              restaurant.name.toLowerCase().contains(query.toLowerCase()))
-          .toList();
-    });
+    Provider.of<RestaurantProvider>(context, listen: false)
+        .searchRestaurants(query);
   }
 
   @override
@@ -64,12 +41,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          scrolledUnderElevation: 0.0,
-          title: AppSearchBar(
-            searchController: _searchController,
-            filterRestaurants: _filterRestaurants,
-          )),
+        backgroundColor: Colors.transparent,
+        scrolledUnderElevation: 0.0,
+        title: AppSearchBar(
+          searchController: _searchController,
+          filterRestaurants: _filterRestaurants,
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -88,9 +66,17 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const SizedBox(height: 24.0),
-                _hasError
-                    ? _buildErrorWidget()
-                    : RestaurantList(filteredRestaurants: _filteredRestaurants),
+                Consumer<RestaurantProvider>(
+                  builder: (context, provider, child) {
+                    if (provider.state == ResultState.loading) {
+                      return const CircularProgressIndicator();
+                    } else if (provider.state == ResultState.error) {
+                      return _buildErrorWidget(provider.message);
+                    } else {
+                      return const RestaurantList();
+                    }
+                  },
+                ),
               ],
             ),
           ),
@@ -99,7 +85,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildErrorWidget() {
+  Widget _buildErrorWidget(String errorMessage) {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.5,
       child: Center(
@@ -113,10 +99,10 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 12.0),
             Text(
-              'Error loading restaurants.',
+              'Error loading restaurants. $errorMessage',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
+                color: Theme.of(context).colorScheme.secondary,
+              ),
             ),
           ],
         ),

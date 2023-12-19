@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:tasty_bites/common/config.dart';
 import 'package:tasty_bites/model/restaurant_model.dart';
 
 class ApiServices {
-  static const String baseUrl = 'https://restaurant-api.dicoding.dev';
-
   Future<List<Restaurant>> getRestaurants() async {
-    final response = await http.get(Uri.parse('$baseUrl/list'));
+    final response = await http.get(Uri.parse('${Config.baseUrl}/list'));
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       final List<dynamic> restaurantsJson = data['restaurants'];
@@ -16,19 +15,19 @@ class ApiServices {
     }
   }
 
-  Future<Restaurant> getRestaurantDetail(String id) async {
-    final response = await http.get(Uri.parse('$baseUrl/detail/$id'));
+  Future<RestaurantDetail> getRestaurantDetail(String id) async {
+    final response = await http.get(Uri.parse('${Config.baseUrl}/detail/$id'));
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       final Map<String, dynamic> restaurantJson = data['restaurant'];
-      return Restaurant.fromJson(restaurantJson);
+      return RestaurantDetail.fromJson(restaurantJson);
     } else {
       throw Exception('Failed to load restaurant detail');
     }
   }
 
   Future<List<Restaurant>> searchRestaurants(String query) async {
-    final response = await http.get(Uri.parse('$baseUrl/search?q=$query'));
+    final response = await http.get(Uri.parse('${Config.baseUrl}/search?q=$query'));
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       final List<dynamic> restaurantsJson = data['restaurants'];
@@ -46,7 +45,7 @@ class ApiServices {
       'name': name,
       'review': review
     };
-    final response = await http.post(Uri.parse('$baseUrl/review'),
+    final response = await http.post(Uri.parse('${Config.baseUrl}/review'),
         headers: headers, body: json.encode(body));
 
     if (response.statusCode == 200) {
