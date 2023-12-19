@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<RestaurantProvider>(context, listen: false).fetchRestaurants();
     });
   }
@@ -62,14 +62,23 @@ class _HomePageState extends State<HomePage> {
                         style: Theme.of(context).textTheme.titleLarge),
                     const SizedBox(height: 2.0),
                     Text('Explore a Culinary Journey',
-                        style: Theme.of(context).textTheme.headlineMedium),
+                        style: Theme.of(context).textTheme.headlineSmall),
                   ],
                 ),
                 const SizedBox(height: 24.0),
                 Consumer<RestaurantProvider>(
                   builder: (context, provider, child) {
                     if (provider.state == ResultState.loading) {
-                      return const CircularProgressIndicator();
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                        ),
+                      );
                     } else if (provider.state == ResultState.error) {
                       return _buildErrorWidget(provider.message);
                     } else {
@@ -98,10 +107,13 @@ class _HomePageState extends State<HomePage> {
               color: Theme.of(context).colorScheme.secondary,
             ),
             const SizedBox(height: 12.0),
-            Text(
-              'Error loading restaurants. $errorMessage',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Theme.of(context).colorScheme.secondary,
+            Center(
+              child: Text(
+                'Error loading restaurants. $errorMessage',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
               ),
             ),
           ],

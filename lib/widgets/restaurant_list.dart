@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasty_bites/widgets/restaurant_card.dart';
-import '../model/restaurant_model.dart';
 import '../provider/restaurant_provider.dart';
 
 class RestaurantList extends StatelessWidget {
@@ -31,7 +30,7 @@ class RestaurantList extends StatelessWidget {
 
   Widget _buildNoRestaurantsFoundWidget(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.45,
+      height: MediaQuery.of(context).size.height * 0.5,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +43,7 @@ class RestaurantList extends StatelessWidget {
             const SizedBox(height: 12.0),
             Text(
               'No restaurants found.',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 color: Theme.of(context).colorScheme.secondary,
               ),
             ),

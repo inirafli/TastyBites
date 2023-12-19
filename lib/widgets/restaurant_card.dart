@@ -30,7 +30,7 @@ class RestaurantCard extends StatelessWidget {
 
   Widget buildCardContent(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Hero(
           tag: restaurant.name,
@@ -40,8 +40,8 @@ class RestaurantCard extends StatelessWidget {
             ),
             child: Image.network(
               '${Config.mediumImageUrl}${restaurant.pictureId}',
-              width: 120.0,
-              height: 94.0,
+              width: 116.0,
+              height: 87.0,
               fit: BoxFit.cover,
             ),
           ),
@@ -49,7 +49,7 @@ class RestaurantCard extends StatelessWidget {
         Expanded(
           child: Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -57,9 +57,9 @@ class RestaurantCard extends StatelessWidget {
                   restaurant.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
-                const SizedBox(height: 8.0),
+                const SizedBox(height: 4.0),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -68,13 +68,13 @@ class RestaurantCard extends StatelessWidget {
                       children: [
                         const Icon(
                           Icons.star_rounded,
-                          size: 22.0,
+                          size: 20.0,
                           color: Colors.amber,
                         ),
                         const SizedBox(width: 4.0),
                         Text(
                           '${restaurant.rating}',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
                     ),
@@ -84,13 +84,13 @@ class RestaurantCard extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.location_on,
-                          size: 18.0,
+                          size: 16.0,
                           color: Theme.of(context).colorScheme.secondary,
                         ),
                         const SizedBox(width: 4.0),
                         Text(
                           restaurant.city,
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
                     ),

@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:tasty_bites/model/restaurant_model.dart';
 import 'package:tasty_bites/data/api_services.dart';
@@ -26,9 +29,17 @@ class RestaurantProvider extends ChangeNotifier {
 
       _state = ResultState.done;
       notifyListeners();
+    } on SocketException {
+      _state = ResultState.error;
+      _message = 'No Internet Connection';
+      notifyListeners();
+    } on TimeoutException catch (_) {
+      _state = ResultState.error;
+      _message = 'Request Timeout';
+      notifyListeners();
     } catch (e) {
       _state = ResultState.error;
-      _message = 'Error: $e';
+      _message = 'Failed to load list';
       notifyListeners();
     }
   }
@@ -42,9 +53,17 @@ class RestaurantProvider extends ChangeNotifier {
 
       _state = ResultState.done;
       notifyListeners();
+    } on SocketException {
+      _state = ResultState.error;
+      _message = 'No Internet Connection';
+      notifyListeners();
+    } on TimeoutException catch (_) {
+      _state = ResultState.error;
+      _message = 'Request Timeout';
+      notifyListeners();
     } catch (e) {
       _state = ResultState.error;
-      _message = 'Error: $e';
+      _message = 'Failed to load detail';
       notifyListeners();
     }
   }
@@ -58,9 +77,17 @@ class RestaurantProvider extends ChangeNotifier {
 
       _state = ResultState.done;
       notifyListeners();
+    } on SocketException {
+      _state = ResultState.error;
+      _message = 'No Internet Connection';
+      notifyListeners();
+    } on TimeoutException catch (_) {
+      _state = ResultState.error;
+      _message = 'Request Timeout';
+      notifyListeners();
     } catch (e) {
       _state = ResultState.error;
-      _message = 'Error: $e';
+      _message = 'Failed to add review';
       notifyListeners();
     }
   }
@@ -74,9 +101,17 @@ class RestaurantProvider extends ChangeNotifier {
 
       _state = ResultState.done;
       notifyListeners();
+    } on SocketException {
+      _state = ResultState.error;
+      _message = 'No Internet Connection';
+      notifyListeners();
+    } on TimeoutException catch (_) {
+      _state = ResultState.error;
+      _message = 'Request Timeout';
+      notifyListeners();
     } catch (e) {
       _state = ResultState.error;
-      _message = 'Error: $e';
+      _message = 'Failed to add review';
       notifyListeners();
     }
   }

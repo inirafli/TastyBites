@@ -18,9 +18,9 @@ final TextTheme appTextTheme = TextTheme(
   titleLarge: GoogleFonts.rubik(
       fontSize: 20, fontWeight: FontWeight.w500, letterSpacing: 0.15),
   titleMedium: GoogleFonts.rubik(
-      fontSize: 16, fontWeight: FontWeight.w500, letterSpacing: 0.15),
+      fontSize: 18, fontWeight: FontWeight.w500, letterSpacing: 0.15),
   titleSmall: GoogleFonts.rubik(
-      fontSize: 14, fontWeight: FontWeight.w500, letterSpacing: 0.1),
+      fontSize: 16, fontWeight: FontWeight.w500, letterSpacing: 0.1),
   bodyLarge: GoogleFonts.rubik(
       fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0.5),
   bodyMedium: GoogleFonts.rubik(
