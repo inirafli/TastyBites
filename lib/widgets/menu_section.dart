@@ -21,7 +21,7 @@ class MenusSection extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         const SizedBox(height: 6.0),
         SizedBox(
@@ -65,7 +65,9 @@ class MenusSection extends StatelessWidget {
                 name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleSmall,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  fontSize: 14.0
+                ),
               ),
               const SizedBox(height: 2.0),
               Text(price, style: Theme.of(context).textTheme.bodySmall),

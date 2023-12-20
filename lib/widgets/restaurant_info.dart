@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:tasty_bites/common/config.dart';
 import 'package:tasty_bites/model/restaurant_model.dart';
 
+import 'category_list.dart';
 import 'menu_section.dart';
 
 class RestaurantInfo extends StatelessWidget {
-  final Restaurant restaurant;
+  final RestaurantDetail restaurantDetail;
 
-  const RestaurantInfo({super.key, required this.restaurant});
+  const RestaurantInfo({super.key, required this.restaurantDetail});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +18,14 @@ class RestaurantInfo extends StatelessWidget {
         children: [
           // Image
           Hero(
-            tag: restaurant.name,
+            tag: 'restaurant_${restaurantDetail.id}',
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(16.0),
                 bottomRight: Radius.circular(16.0),
               ),
               child: Image.network(
-                restaurant.pictureId,
+                '${Config.mediumImageUrl}${restaurantDetail.pictureId}',
                 width: double.infinity,
                 height: 240.0,
                 fit: BoxFit.cover,
@@ -36,41 +38,52 @@ class RestaurantInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  restaurant.name,
+                  restaurantDetail.name,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const SizedBox(height: 6.0),
+                const SizedBox(height: 4.0),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(
                       Icons.location_on,
-                      size: 18.0,
+                      size: 16.0,
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                     const SizedBox(width: 6.0),
                     Text(
-                      restaurant.city,
-                      style: Theme.of(context).textTheme.titleMedium,
+                      restaurantDetail.city,
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ],
                 ),
                 const SizedBox(height: 24.0),
                 Text(
                   'Description',
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
                 const SizedBox(height: 4.0),
                 Text(
-                  restaurant.description,
+                  restaurantDetail.description,
                   maxLines: 8,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 24.0),
                 Text(
-                  'Restaurant Rating',
-                  style: Theme.of(context).textTheme.titleMedium,
+                  'Address',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: 4.0),
+                Text(
+                  restaurantDetail.address,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 24.0),
+                CategoryList(categories: restaurantDetail.categories),
+                Text(
+                  'Rating',
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
                 const SizedBox(height: 6.0),
                 Row(
@@ -83,7 +96,7 @@ class RestaurantInfo extends StatelessWidget {
                     ),
                     const SizedBox(width: 8.0),
                     Text(
-                      '${restaurant.rating}/5.0',
+                      '${restaurantDetail.rating}/5.0',
                       style: Theme.of(context)
                           .textTheme
                           .titleSmall
@@ -92,16 +105,16 @@ class RestaurantInfo extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 24.0),
-                // MenusSection(
-                //   items: restaurant.menus.foods,
-                //   icon: Icons.restaurant,
-                //   title: 'Foods',
-                // ),
-                // MenusSection(
-                //   items: restaurant.menus.drinks,
-                //   icon: Icons.local_drink_rounded,
-                //   title: 'Drinks',
-                // ),
+                MenusSection(
+                  items: restaurantDetail.menus.foods,
+                  icon: Icons.restaurant,
+                  title: 'Foods',
+                ),
+                MenusSection(
+                  items: restaurantDetail.menus.drinks,
+                  icon: Icons.local_drink_rounded,
+                  title: 'Drinks',
+                ),
               ],
             ),
           ),

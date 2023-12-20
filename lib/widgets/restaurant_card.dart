@@ -13,7 +13,7 @@ class RestaurantCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, RestaurantDetailPage.routeName,
-            arguments: restaurant);
+            arguments: restaurant.id);
       },
       child: Card(
         color: Theme.of(context).colorScheme.onSecondary,
@@ -33,7 +33,7 @@ class RestaurantCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Hero(
-          tag: restaurant.name,
+          tag: 'restaurant_${restaurant.id}',
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(16.0),

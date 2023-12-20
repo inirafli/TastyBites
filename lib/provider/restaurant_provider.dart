@@ -16,6 +16,10 @@ class RestaurantProvider extends ChangeNotifier {
 
   List<Restaurant> get restaurants => _restaurants;
 
+  RestaurantDetail? _restaurantDetail;
+
+  RestaurantDetail? get restaurantDetail => _restaurantDetail;
+
   ResultState get state => _state;
 
   String get message => _message;
@@ -49,7 +53,7 @@ class RestaurantProvider extends ChangeNotifier {
       _state = ResultState.loading;
       notifyListeners();
 
-      await _apiServices.getRestaurantDetail(id);
+      _restaurantDetail = await _apiServices.getRestaurantDetail(id);
 
       _state = ResultState.done;
       notifyListeners();
