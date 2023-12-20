@@ -23,7 +23,7 @@ class MenusSection extends StatelessWidget {
           title,
           style: Theme.of(context).textTheme.titleSmall,
         ),
-        const SizedBox(height: 6.0),
+        const SizedBox(height: 8.0),
         SizedBox(
           height: 120.0,
           child: ListView.builder(
@@ -35,7 +35,6 @@ class MenusSection extends StatelessWidget {
             },
           ),
         ),
-        const SizedBox(height: 24.0),
       ],
     );
   }

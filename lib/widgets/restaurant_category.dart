@@ -15,7 +15,7 @@ class CategoryList extends StatelessWidget {
           'Categories',
           style: Theme.of(context).textTheme.titleSmall,
         ),
-        const SizedBox(height: 4.0),
+        const SizedBox(height: 8.0),
         Wrap(
           spacing: 4.0,
           runSpacing: 4.0,

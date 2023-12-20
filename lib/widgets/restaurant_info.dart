@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tasty_bites/common/config.dart';
 import 'package:tasty_bites/model/restaurant_model.dart';
+import 'package:tasty_bites/widgets/restaurant_reviews.dart';
 
-import 'category_list.dart';
-import 'menu_section.dart';
+import 'restaurant_category.dart';
+import 'restaurant_menus.dart';
 
 class RestaurantInfo extends StatelessWidget {
   final RestaurantDetail restaurantDetail;
@@ -41,7 +42,7 @@ class RestaurantInfo extends StatelessWidget {
                   restaurantDetail.name,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const SizedBox(height: 4.0),
+                const SizedBox(height: 6.0),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -85,7 +86,7 @@ class RestaurantInfo extends StatelessWidget {
                   'Rating',
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
-                const SizedBox(height: 6.0),
+                const SizedBox(height: 8.0),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -110,11 +111,14 @@ class RestaurantInfo extends StatelessWidget {
                   icon: Icons.restaurant,
                   title: 'Foods',
                 ),
+                const SizedBox(height: 24.0),
                 MenusSection(
                   items: restaurantDetail.menus.drinks,
                   icon: Icons.local_drink_rounded,
                   title: 'Drinks',
                 ),
+                const SizedBox(height: 24.0),
+                CustomerReviewList(customerReviews: restaurantDetail.customerReviews),
               ],
             ),
           ),

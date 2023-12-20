@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tasty_bites/model/restaurant_model.dart';
 import 'package:tasty_bites/provider/restaurant_provider.dart';
 import 'package:tasty_bites/screens/detail_screen.dart';
 import 'package:tasty_bites/common/styles.dart';
@@ -35,6 +34,11 @@ class MyApp extends StatelessWidget {
           systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
               statusBarIconBrightness: Brightness.dark),
+        ),
+        snackBarTheme: SnackBarThemeData(
+          contentTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+            color: Theme.of(context).colorScheme.onSecondary,
+          ),
         ),
       ),
       initialRoute: HomePage.routeName,

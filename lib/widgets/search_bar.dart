@@ -33,11 +33,13 @@ class AppSearchBar extends StatelessWidget {
           border: InputBorder.none,
           prefixIcon: Icon(
             Icons.search,
+            size: 20.0,
             color: Theme.of(context).colorScheme.secondary,
           ),
           suffixIcon: IconButton(
             icon: Icon(
               Icons.clear,
+              size: 20.0,
               color: Theme.of(context).colorScheme.secondary,
             ),
             onPressed: () {
