@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                   builder: (context, provider, child) {
                     if (provider.state == ResultState.loading) {
                       return SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.5,
+                        height: MediaQuery.of(context).size.height * 0.65,
                         child: Center(
                           child: CircularProgressIndicator(
                             valueColor: AlwaysStoppedAnimation<Color>(
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildErrorWidget(String errorMessage) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: MediaQuery.of(context).size.height * 0.65,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

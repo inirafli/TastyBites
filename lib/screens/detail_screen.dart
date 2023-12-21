@@ -23,6 +23,15 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<RestaurantProvider>(context, listen: false)
+          .fetchRestaurantDetail(widget.restaurantId);
+    });
+  }
+
+  @override
   void dispose() {
     _nameController.dispose();
     _reviewController.dispose();
@@ -31,9 +40,6 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<RestaurantProvider>(context, listen: false)
-        .fetchRestaurantDetail(widget.restaurantId);
-
     return Scaffold(
       backgroundColor: Theme
           .of(context)
