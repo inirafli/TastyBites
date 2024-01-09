@@ -4,6 +4,8 @@ import 'package:tasty_bites/provider/restaurant_provider.dart';
 import 'package:tasty_bites/screens/detail_screen.dart';
 import 'package:tasty_bites/common/styles.dart';
 import 'package:flutter/services.dart';
+import 'package:tasty_bites/screens/favorite_screen.dart';
+import 'package:tasty_bites/screens/setting_screen.dart';
 import 'screens/home_screen.dart';
 
 void main() {
@@ -48,7 +50,13 @@ class MyApp extends StatelessWidget {
           final restaurantId = ModalRoute.of(context)?.settings.arguments as String;
           return RestaurantDetailPage(restaurantId: restaurantId);
         },
+        FavoritesPage.routeName: (context) => const FavoritesPage(),
+        SettingsPage.routeName: (context) => const SettingsPage(),
       },
     );
   }
+}
+
+class FavoriteScreen {
+  const FavoriteScreen();
 }

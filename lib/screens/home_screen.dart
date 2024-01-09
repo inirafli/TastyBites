@@ -4,6 +4,7 @@ import 'package:tasty_bites/widgets/restaurant_list.dart';
 import 'package:tasty_bites/widgets/search_bar.dart';
 
 import '../provider/restaurant_provider.dart';
+import '../widgets/bottom_navigation.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
@@ -16,12 +17,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
+  int _currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<RestaurantProvider>(context, listen: false).fetchRestaurants();
+      Provider.of<RestaurantProvider>(context, listen: false)
+          .fetchRestaurants();
     });
   }
 
@@ -41,6 +44,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0.0,
         title: AppSearchBar(
@@ -91,6 +95,14 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavigationWidget(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
     );
   }
 
@@ -112,8 +124,8 @@ class _HomePageState extends State<HomePage> {
                 'Error loading restaurants. $errorMessage',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
               ),
             ),
           ],
