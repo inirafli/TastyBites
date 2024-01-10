@@ -33,7 +33,7 @@ class RestaurantCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Hero(
-          tag: 'restaurant_${restaurant.id}',
+          tag: 'restaurant_image_${restaurant.pictureId}',
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(16.0),

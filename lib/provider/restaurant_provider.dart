@@ -5,16 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:tasty_bites/model/restaurant_model.dart';
 import 'package:tasty_bites/data/api_services.dart';
 
+import '../utils/favorite_helper.dart';
+
 enum ResultState { loading, done, error }
 
 class RestaurantProvider extends ChangeNotifier {
   final ApiServices _apiServices = ApiServices();
 
   List<Restaurant> _restaurants = [];
+  List<Restaurant> _favoriteRestaurants = [];
   ResultState _state = ResultState.done;
   String _message = '';
 
   List<Restaurant> get restaurants => _restaurants;
+
+  List<Restaurant> get favoriteRestaurants => _favoriteRestaurants;
 
   RestaurantDetail? _restaurantDetail;
 
@@ -30,6 +35,14 @@ class RestaurantProvider extends ChangeNotifier {
       notifyListeners();
 
       _restaurants = await _apiServices.getRestaurants();
+
+      final favorites = await FavoriteUtils.getFavorites();
+      for (var restaurant in _restaurants) {
+        restaurant.isFavorite = favorites.contains(restaurant.id);
+      }
+
+      _favoriteRestaurants =
+          _restaurants.where((restaurant) => restaurant.isFavorite).toList();
 
       _state = ResultState.done;
       notifyListeners();
@@ -48,12 +61,23 @@ class RestaurantProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> fetchFavoriteRestaurants() async {
+    final favorites = await FavoriteUtils.getFavorites();
+    _favoriteRestaurants = _restaurants
+        .where((restaurant) => favorites.contains(restaurant.id))
+        .toList();
+    notifyListeners();
+  }
+
   Future<void> fetchRestaurantDetail(String id) async {
     try {
       _state = ResultState.loading;
       notifyListeners();
 
       _restaurantDetail = await _apiServices.getRestaurantDetail(id);
+
+      final favorites = await FavoriteUtils.getFavorites();
+      _restaurantDetail?.isFavorite = favorites.contains(_restaurantDetail?.id);
 
       _state = ResultState.done;
       notifyListeners();
@@ -117,6 +141,31 @@ class RestaurantProvider extends ChangeNotifier {
       _state = ResultState.error;
       _message = 'Failed to add review';
       notifyListeners();
+    }
+  }
+
+  Future<void> toggleFavoriteStatus(String restaurantId) async {
+    final restaurantIndex =
+    _restaurants.indexWhere((restaurant) => restaurant.id == restaurantId);
+
+    if (restaurantIndex != -1) {
+      final isFavorite = !_restaurants[restaurantIndex].isFavorite;
+      _restaurants[restaurantIndex].isFavorite = isFavorite;
+
+      if (isFavorite) {
+        await FavoriteUtils.addFavorite(restaurantId);
+      } else {
+        await FavoriteUtils.removeFavorite(restaurantId);
+      }
+
+      await fetchFavoriteRestaurants();
+
+      notifyListeners();
+
+      if (_restaurantDetail?.id == restaurantId) {
+        _restaurantDetail!.isFavorite = isFavorite;
+        notifyListeners();
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
 class Restaurant {
   final String id, name, description, pictureId, city;
   final double rating;
+  bool isFavorite;
 
   Restaurant({
     required this.id,
@@ -9,6 +10,7 @@ class Restaurant {
     required this.pictureId,
     required this.city,
     required this.rating,
+    this.isFavorite = false,
   });
 
   factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(
@@ -27,6 +29,7 @@ class RestaurantDetail {
   final Menus menus;
   final double rating;
   final List<CustomerReview> customerReviews;
+  bool isFavorite;
 
   RestaurantDetail({
     required this.id,
@@ -39,6 +42,7 @@ class RestaurantDetail {
     required this.menus,
     required this.rating,
     required this.customerReviews,
+    this.isFavorite = false,
   });
 
   factory RestaurantDetail.fromJson(Map<String, dynamic> json) =>

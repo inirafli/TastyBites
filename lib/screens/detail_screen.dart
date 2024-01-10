@@ -41,10 +41,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme
-          .of(context)
-          .colorScheme
-          .onSecondary,
+      backgroundColor: Theme.of(context).colorScheme.onSecondary,
       body: SafeArea(
         key: _scaffoldKey,
         child: Consumer<RestaurantProvider>(
@@ -53,10 +50,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
               return Center(
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(
-                    Theme
-                        .of(context)
-                        .colorScheme
-                        .secondary,
+                    Theme.of(context).colorScheme.secondary,
                   ),
                 ),
               );
@@ -64,7 +58,8 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
               return _buildErrorWidget(context, provider.message);
             } else if (provider.restaurantDetail != null) {
               return RestaurantInfo(
-                  restaurantDetail: provider.restaurantDetail!);
+                restaurantDetail: provider.restaurantDetail!
+              );
             } else {
               return Container();
             }
@@ -72,16 +67,10 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .secondary,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () => _showAddReviewDialog(context),
         child: Icon(Icons.comment,
-            color: Theme
-                .of(context)
-                .colorScheme
-                .onSecondary),
+            color: Theme.of(context).colorScheme.onSecondary),
       ),
     );
   }
@@ -94,26 +83,16 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
           Icon(
             Icons.error_outline,
             size: 62.0,
-            color: Theme
-                .of(context)
-                .colorScheme
-                .secondary,
+            color: Theme.of(context).colorScheme.secondary,
           ),
           const SizedBox(height: 12.0),
           Center(
             child: Text(
               'Error loading restaurant details. $errorMessage',
               textAlign: TextAlign.center,
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .titleSmall
-                  ?.copyWith(
-                color: Theme
-                    .of(context)
-                    .colorScheme
-                    .secondary,
-              ),
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
             ),
           ),
         ],
