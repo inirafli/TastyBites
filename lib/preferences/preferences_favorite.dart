@@ -1,7 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class FavoriteUtils {
+class FavoritePreferences {
   static const _favoriteKey = 'favorite_key';
+  static const _notificationKey = 'notification_key';
 
   static Future<List<String>> getFavorites() async {
     final prefs = await SharedPreferences.getInstance();
