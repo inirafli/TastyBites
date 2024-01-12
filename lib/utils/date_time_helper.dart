@@ -11,6 +11,11 @@ class DateTimeHelper {
     final todayDateAndTime = "$todayDate $timeSpecific";
     var resultToday = completeFormat.parseStrict(todayDateAndTime);
 
-    return now.isAfter(resultToday) ? resultToday : resultToday.subtract(const Duration(days: 1));
+    var formatted = resultToday.add(const Duration(days: 1));
+    final tomorrowDate = dateFormat.format(formatted);
+    final tomorrowDateAndTime = "$tomorrowDate $timeSpecific";
+    var resultTomorrow = completeFormat.parseStrict(tomorrowDateAndTime);
+
+    return now.isAfter(resultToday) ? resultTomorrow : resultToday;
   }
 }

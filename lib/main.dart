@@ -4,14 +4,14 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:tasty_bites/provider/restaurant_provider.dart';
 import 'package:tasty_bites/provider/scheduling_provider.dart';
-import 'package:tasty_bites/screens/detail_screen.dart';
+import 'package:tasty_bites/ui/detail_screen.dart';
 import 'package:tasty_bites/common/styles.dart';
 import 'package:flutter/services.dart';
-import 'package:tasty_bites/screens/favorite_screen.dart';
-import 'package:tasty_bites/screens/setting_screen.dart';
+import 'package:tasty_bites/ui/favorite_screen.dart';
+import 'package:tasty_bites/ui/setting_screen.dart';
 import 'package:tasty_bites/utils/background_services.dart';
 import 'package:tasty_bites/utils/notification_helper.dart';
-import 'screens/home_screen.dart';
+import 'ui/home_screen.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();

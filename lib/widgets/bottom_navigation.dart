@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../screens/favorite_screen.dart';
-import '../screens/home_screen.dart';
-import '../screens/setting_screen.dart';
+import '../ui/favorite_screen.dart';
+import '../ui/home_screen.dart';
+import '../ui/setting_screen.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
   final int currentIndex;

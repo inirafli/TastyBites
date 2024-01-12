@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:tasty_bites/model/restaurant_model.dart';
 import 'package:tasty_bites/data/api_services.dart';
 
-import '../preferences/preferences_favorite.dart';
+import '../utils/favorites_helper.dart';
+
+
 
 enum ResultState { loading, done, error }
 
@@ -36,7 +38,7 @@ class RestaurantProvider extends ChangeNotifier {
 
       _restaurants = await _apiServices.getRestaurants();
 
-      final favorites = await FavoritePreferences.getFavorites();
+      final favorites = await FavoriteHelper.getFavorites();
       for (var restaurant in _restaurants) {
         restaurant.isFavorite = favorites.contains(restaurant.id);
       }
@@ -62,7 +64,7 @@ class RestaurantProvider extends ChangeNotifier {
   }
 
   Future<void> fetchFavoriteRestaurants() async {
-    final favorites = await FavoritePreferences.getFavorites();
+    final favorites = await FavoriteHelper.getFavorites();
     _favoriteRestaurants = _restaurants
         .where((restaurant) => favorites.contains(restaurant.id))
         .toList();
@@ -76,7 +78,7 @@ class RestaurantProvider extends ChangeNotifier {
 
       _restaurantDetail = await _apiServices.getRestaurantDetail(id);
 
-      final favorites = await FavoritePreferences.getFavorites();
+      final favorites = await FavoriteHelper.getFavorites();
       _restaurantDetail?.isFavorite = favorites.contains(_restaurantDetail?.id);
 
       _state = ResultState.done;
@@ -153,9 +155,9 @@ class RestaurantProvider extends ChangeNotifier {
       _restaurants[restaurantIndex].isFavorite = isFavorite;
 
       if (isFavorite) {
-        await FavoritePreferences.addFavorite(restaurantId);
+        await FavoriteHelper.addFavorite(restaurantId);
       } else {
-        await FavoritePreferences.removeFavorite(restaurantId);
+        await FavoriteHelper.removeFavorite(restaurantId);
       }
 
       await fetchFavoriteRestaurants();

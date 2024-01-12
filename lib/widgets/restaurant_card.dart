@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasty_bites/common/config.dart';
 import 'package:tasty_bites/model/restaurant_model.dart';
-import 'package:tasty_bites/screens/detail_screen.dart';
+import 'package:tasty_bites/ui/detail_screen.dart';
 
 class RestaurantCard extends StatelessWidget {
   final Restaurant restaurant;
